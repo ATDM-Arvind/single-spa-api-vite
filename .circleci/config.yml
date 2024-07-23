@@ -17,6 +17,9 @@ jobs:
           name: Install dependencies
           command: npm install
       - run:
+          name: Run tests
+          command: npm test 
+      - run:
           name: Vite build
           command: npm run build
       - run:
@@ -54,7 +57,7 @@ workflows:
   build:
     jobs:
       - build-node
-      - testing
+    # - testing
     # - deploy:
     #     requires:
     #       - build-node
