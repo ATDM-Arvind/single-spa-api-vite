@@ -9,4 +9,11 @@ export default {
     '\\.(css|less)$': 'identity-obj-proxy',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
+  reporters: [
+    'default',
+    ['jest-junit', {
+      outputDirectory: './reports/jest',
+      outputName: 'jest-report.xml',
+    }],
+  ],
 };

@@ -18,11 +18,12 @@ jobs:
           command: npm install
       - run:
           name: Run tests
-          command: npm test --ci --runInBand --reporters=default --reporters=jest-junit 
+          command: npx jest --ci --runInBand --reporters=default --reporters=jest-junit 
           environment:
-            JEST_JUNIT_OUTPUT: "reports/junit/js-test-results.xml"
+            JEST_JUNIT_OUTPUT_DIR: ./reports/
+            JEST_JUNIT_ADD_FILE_ATTRIBUTE: "true"
       - store_test_results:
-          path: reports/junit
+          path: ./reports/
       - run:
           name: Vite build
           command: npm run build
