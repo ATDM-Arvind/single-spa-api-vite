@@ -4,18 +4,23 @@ version: 2.1
 orbs:
   node: circleci/node@5
 jobs:
+  init:
+      # Build node project
+      executor: node/default
+      working_directory: ~/project/api-vite
+      steps:
+        - checkout:
+            path: ~/project
+        - node/install-packages:
+            pkg-manager: npm
+        - run:
+            name: Install dependencies
+            command: npm install
   build-node:
     # Build node project
     executor: node/default
     working_directory: ~/project/api-vite
     steps:
-      - checkout:
-          path: ~/project
-      - node/install-packages:
-          pkg-manager: npm
-      - run:
-          name: Install dependencies
-          command: npm install
       - run:
           name: Vite build
           command: npm run build
@@ -53,6 +58,9 @@ jobs:
       - store_test_results:
           path: ./reports/
 workflows:
+  initialize:
+    jobs:
+      - init
   test_and_build:
     jobs:
       - testing
