@@ -1,21 +1,23 @@
-# This config was automatically generated from your source code
-# Stacks detected: deps:node:api-vite
 version: 2.1
 orbs:
   node: circleci/node@5
+
 jobs:
   checkout_and_install:
-      # Build node project
-      executor: node/default
-      working_directory: ~/project/api-vite
-      steps:
-        - checkout:
-            path: ~/project
-        - node/install-packages:
-            pkg-manager: npm
-        - run:
-            name: Install dependencies
-            command: npm install
+    executor: node/default
+    working_directory: ~/project/api-vite
+    steps:
+      - checkout
+      - node/install-packages:
+          pkg-manager: npm
+      - run:
+          name: Install dependencies
+          command: npm install
+      - persist_to_workspace:
+          root: .
+          paths:
+            - .
+
   build-node:
     # Build node project
     executor: node/default
@@ -36,6 +38,7 @@ jobs:
       - store_artifacts:
           path: ~/artifacts
           destination: node-build
+
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
@@ -45,8 +48,10 @@ jobs:
       - run:
           name: deploy
           command: '#e.g. ./deploy.sh'
+
   testing:
     executor: node/default
+    working_directory: ~/project/api-vite
     steps:
       - attach_workspace:
           at: ~/project/api-vite
@@ -61,6 +66,7 @@ jobs:
             JEST_JUNIT_ADD_FILE_ATTRIBUTE: "true"
       - store_test_results:
           path: ./reports/
+
 workflows:
   test_and_build:
     jobs:
@@ -71,7 +77,6 @@ workflows:
       - testing:
           requires:
             - checkout_and_install
-    # - testing
     # - deploy:
     #     requires:
     #       - build-node
