@@ -1,7 +1,6 @@
 version: 2.1
 orbs:
   node: circleci/node@5
-
 jobs:
   checkout_and_install:
     executor: node/default
@@ -56,9 +55,6 @@ jobs:
     steps:
       - attach_workspace:
           at: ~/project/api-vite
-      - run:
-          name: Install dependencies
-          command: npm install
       - run:
           name: Run tests
           command: npx jest --ci --runInBand --reporters=default --reporters=jest-junit 
