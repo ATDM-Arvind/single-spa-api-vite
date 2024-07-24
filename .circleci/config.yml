@@ -17,14 +17,6 @@ jobs:
           name: Install dependencies
           command: npm install
       - run:
-          name: Run tests
-          command: npx jest --ci --runInBand --reporters=default --reporters=jest-junit 
-          environment:
-            JEST_JUNIT_OUTPUT_DIR: ./reports/
-            JEST_JUNIT_ADD_FILE_ATTRIBUTE: "true"
-      - store_test_results:
-          path: ./reports/
-      - run:
           name: Vite build
           command: npm run build
       - run:
@@ -49,18 +41,21 @@ jobs:
   testing:
     executor: node/default
     steps:
-      # Replace this with steps to deploy to users
       - run:
-          name: Install JUnit coverage reporter
-          command: npm install --dev jest-junit
-      - run:   
-          name: Run tests with JUnit as reporter
-          command: npm test --ci --runInBand --reporters=default --reporters=jest-junit
+          name: Install dependencies
+          command: npm install
+      - run:
+          name: Run tests
+          command: npx jest --ci --runInBand --reporters=default --reporters=jest-junit 
+          environment:
+            JEST_JUNIT_OUTPUT_DIR: ./reports/
+            JEST_JUNIT_ADD_FILE_ATTRIBUTE: "true"
       - store_test_results:
           path: ./reports/
 workflows:
-  build:
+  test_and_build:
     jobs:
+      - testing
       - build-node
     # - testing
     # - deploy:
