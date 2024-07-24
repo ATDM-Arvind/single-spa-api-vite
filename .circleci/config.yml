@@ -4,7 +4,7 @@ version: 2.1
 orbs:
   node: circleci/node@5
 jobs:
-  init:
+  checkout_and_install:
       # Build node project
       executor: node/default
       working_directory: ~/project/api-vite
@@ -58,13 +58,15 @@ jobs:
       - store_test_results:
           path: ./reports/
 workflows:
-  initialize:
-    jobs:
-      - init
   test_and_build:
     jobs:
-      - testing
-      - build-node
+      - checkout_and_install
+      - build-node:
+          requires:
+            - checkout_and_install
+      - testing:
+          requires:
+            - checkout_and_install
     # - testing
     # - deploy:
     #     requires:
