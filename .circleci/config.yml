@@ -52,9 +52,9 @@ jobs:
     steps:
       - checkout
       - aws-s3/sync:
-          auth:
-          - aws-cli/setup:
-                role_arn: arn:aws:iam::590376488337:role/aws-controltower-AdministratorExecutionRole
+          # auth:
+          # - aws-cli/setup:
+          #       role_arn: arn:aws:iam::590376488337:role/aws-controltower-AdministratorExecutionRole
           from: bucket
           to: 's3://myviteapi/prefix'
           arguments: | # Optional arguments
