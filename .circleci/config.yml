@@ -51,9 +51,6 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ykp3v3chN9qedoAD0yGx2fPFtOQYL4uJfe7ko0wo
     steps:
       - checkout
-      - run:
-          name: Install awscli
-          command: sudo pip install awscli
       - aws-s3/sync:
           # auth:
           # - aws-cli/setup:
