@@ -2,6 +2,7 @@ version: 2.1
 orbs:
   node: circleci/node@5
   aws-s3: circleci/aws-s3@4.0.0 # use the AWS S3 orb in your configuration
+  aws-cli: circleci/aws-cli@4.0
 
 jobs:
   checkout_and_install:
@@ -44,13 +45,16 @@ jobs:
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
-      - image: amazon/aws-cli:2.0.30 
+      - image: cimg/base:current 
         environment:
           AWS_ACCESS_KEY_ID: ASIAYS5JOJWIZHNO3QHT
           AWS_SECRET_ACCESS_KEY: ykp3v3chN9qedoAD0yGx2fPFtOQYL4uJfe7ko0wo
     steps:
       - checkout
       - aws-s3/sync:
+          auth:
+          - aws-cli/setup:
+                role_arn: arn:aws:iam::590376488337:role/aws-controltower-AdministratorExecutionRole
           from: bucket
           to: 's3://myviteapi/prefix'
           arguments: | # Optional arguments
