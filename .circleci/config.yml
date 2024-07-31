@@ -61,7 +61,7 @@ jobs:
           # - aws-cli/setup:
           #       role_arn: arn:aws:iam::590376488337:role/aws-controltower-AdministratorExecutionRole
           from: bucket
-          to: 's3://myviteapi/prefix'
+          to: 's3://myviteapi'
 
   testing:
     executor: node/default
