@@ -60,7 +60,7 @@ jobs:
           # auth:
           # - aws-cli/setup:
           #       role_arn: arn:aws:iam::590376488337:role/aws-controltower-AdministratorExecutionRole
-          from: bucket
+          from: api-vite
           to: 's3://myviteapi'
 
   testing:
