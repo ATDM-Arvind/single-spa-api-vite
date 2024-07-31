@@ -58,8 +58,7 @@ jobs:
           from: bucket
           to: 's3://myviteapi/prefix'
           arguments: | # Optional arguments
-            --acl public-read \
-            --cache-control "max-age=86400"
+            --acl public-read
 
   testing:
     executor: node/default
