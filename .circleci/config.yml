@@ -57,7 +57,7 @@ jobs:
 
       - run: # Deploy to S3 using the sync command
           name: Deploy to S3
-          command: aws s3 sync api-vite <s3://myviteapi
+          command: aws s3 sync api-vite s3://myviteapi
       # - run:
       #     name: Configure AWS CLI
           # command: |
