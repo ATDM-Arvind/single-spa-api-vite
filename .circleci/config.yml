@@ -44,7 +44,7 @@ jobs:
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
-      - image: cimg/base:stable
+      - image: amazon/aws-cli:2.0.30 
         environment:
           AWS_ACCESS_KEY_ID: ASIAYS5JOJWIZHNO3QHT
           AWS_SECRET_ACCESS_KEY: ykp3v3chN9qedoAD0yGx2fPFtOQYL4uJfe7ko0wo
