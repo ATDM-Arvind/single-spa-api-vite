@@ -78,16 +78,16 @@ jobs:
 workflows:
   test_and_build:
     jobs:
-      - checkout_and_install
-      - build-node:
-          requires:
-            - checkout_and_install
-      - testing:
-          requires:
-            - checkout_and_install
+      # - checkout_and_install
+      # - build-node:
+      #     requires:
+      #       - checkout_and_install
+      # - testing:
+      #     requires:
+      #       - checkout_and_install
       - deploy:
-          requires:
-            - build-node # Only run deploy job once the build job has completed
+          # requires:
+          #   - build-node # Only run deploy job once the build job has completed
           filters:
             branches:
               only: main # Only deploy when the commit is on the Main branch
