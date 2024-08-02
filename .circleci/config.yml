@@ -93,9 +93,9 @@ workflows:
       - build-node:
           requires:
             - checkout_and_install
-      # - testing:
-      #     requires:
-      #       - checkout_and_install
+      - testing:
+          requires:
+            - checkout_and_install
       - deploy:
           requires:
             - build-node # Only run deploy job once the build job has completed
